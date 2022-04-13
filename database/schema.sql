@@ -24,10 +24,11 @@ create schema "public";
 
 CREATE TABLE "public"."items" (
 	"itemId" serial NOT NULL,
+	"title" TEXT NOT NULL,
 	"fileUrl" TEXT NOT NULL,
-	"uploadedAt" timestamp with time zone NOT NULL,
 	"userId" integer NOT NULL,
 	"content" TEXT NOT NULL,
+	"uploadedAt" timestamp with time zone NOT NULL,
 	CONSTRAINT "items_pk" PRIMARY KEY ("itemId")
 ) WITH (
   OIDS=FALSE
