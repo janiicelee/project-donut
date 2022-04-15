@@ -17,6 +17,11 @@ h2,
 .card {
   height: 95%;
   overflow: hidden;
-  padding: 5px;
-  margin: 5px;
+  padding: 2px;
+  margin: 2px;
+}
+
+hr {
+  border: none;
+  padding: 0.5px;
 }
