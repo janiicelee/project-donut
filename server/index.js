@@ -58,14 +58,14 @@ app.get('/api/items', (req, res, next) => {
 app.post('/api/uploads', uploadsMiddleware, (req, res, next) => {
 
   const { title, content, userId } = req.body;
-  const imgUrl = `/images/${req.file.filename}`;
+  const fileUrl = `/images/${req.file.filename}`;
   const sql = `
     insert into "items" ("title", "fileUrl", "userId", "content", "uploadedAt")
     values ($1, $2, $3, $4, now())
     returning *
   `;
 
-  const params = [title, imgUrl, userId, content];
+  const params = [title, fileUrl, userId, content];
   db.query(sql, params)
     .then(result => {
       const [file] = result.rows;
