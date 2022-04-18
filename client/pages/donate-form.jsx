@@ -74,7 +74,7 @@ export default class DonateForm extends React.Component {
       <div className="container">
         <div className="color-overlay d-flex justify-content-center align-items-center">
           <Form className="rounded p-4 p-sm-3" onSubmit={this.handleSubmit}>
-            <h4 className="text-center">Start donating your item!</h4>
+            <h4 className="text-center font-weight-bold">Start donating your item!</h4>
             <img src={placeholder} alt="placeholder" className="item-img"></img>
             <Form.Group className="mb-3" controlId="FormTitle">
               <Form.Label>What is your item?</Form.Label>

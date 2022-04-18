@@ -3,6 +3,7 @@ import Home from './pages/home';
 import Catalog from './pages/catalog';
 import parseRoute from './lib/parse-route';
 import DonateForm from './pages/donate-form';
+import ItemDetails from './pages/item-details';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -26,6 +27,11 @@ export default class App extends React.Component {
 
     if (route.path === 'donate') {
       return <DonateForm />;
+    }
+
+    if (route.path === 'items') {
+      const itemId = route.params.get('itemId');
+      return <ItemDetails itemId={itemId}/>;
     }
   }
 
