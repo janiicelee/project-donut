@@ -3,6 +3,8 @@ const pg = require('pg');
 const express = require('express');
 const errorMiddleware = require('./error-middleware');
 const staticMiddleware = require('./static-middleware');
+const uploadsMiddleware = require('./uploads-middleware');
+// const ClientError = require('./client-error');
 
 const db = new pg.Pool({
   connectionString: 'postgres://dev:dev@localhost/dev',
@@ -12,6 +14,10 @@ const db = new pg.Pool({
 });
 
 const app = express();
+
+const jsonMiddleware = express.json();
+
+app.use(jsonMiddleware);
 
 app.use(staticMiddleware);
 
@@ -46,4 +52,24 @@ app.get('/api/items', (req, res, next) => {
       });
     });
 
+});
+
+// POST item
+app.post('/api/uploads', uploadsMiddleware, (req, res, next) => {
+
+  const { title, content, userId } = req.body;
+  const fileUrl = `/images/${req.file.filename}`;
+  const sql = `
+    insert into "items" ("title", "fileUrl", "userId", "content", "uploadedAt")
+    values ($1, $2, $3, $4, now())
+    returning *
+  `;
+
+  const params = [title, fileUrl, userId, content];
+  db.query(sql, params)
+    .then(result => {
+      const [file] = result.rows;
+      res.status(201).json(file);
+    })
+    .catch(err => next(err));
 });
