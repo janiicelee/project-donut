@@ -1,5 +1,5 @@
-insert into "users" ("userId", "username", "email", "hashedPassword", "phoneNumber", "joinedAt", "location")
-values (1, 'demouser', 'demo@demo.com', 'demouser', '+1999888777', now(), 'Irvine, California')
+insert into "users" ("userId", "username", "email", "hashedPassword", "joinedAt", "latitude", "longitude", "location")
+values (1, 'demouser', 'demo@demo.com', 'demouser', now(), null, null, null)
 returning *;
 
 

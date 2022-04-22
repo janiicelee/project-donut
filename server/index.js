@@ -1,6 +1,7 @@
 require('dotenv/config');
 const pg = require('pg');
 const express = require('express');
+const argon2 = require('argon2');
 const errorMiddleware = require('./error-middleware');
 const staticMiddleware = require('./static-middleware');
 const uploadsMiddleware = require('./uploads-middleware');
@@ -99,6 +100,32 @@ app.get('/api/items/:itemId', (req, res, next) => {
         throw new ClientError(400, `cannot find item with itemId ${itemId}`);
       }
       res.json(result.rows[0]);
+    })
+    .catch(err => next(err));
+});
+
+// user sign-up
+app.post('/api/auth/sign-up', (req, res, next) => {
+  const { username, password, email, latitude, longitude, location } = req.body;
+  if (!username || !password) {
+    throw new ClientError(400, 'username and password are required fields');
+  }
+
+  argon2.hash(password)
+    .then(hashed => {
+      const sql = `
+        insert into "users" ("username", "email", "hashedPassword", "latitude", "longitude", "location", "joinedAt" )
+        values ($1, $2, $3, $4, $5, $6, now())
+        returning "userId", "username", "joinedAt"
+      `;
+
+      const params = [username, email, hashed, latitude, longitude, location];
+      db.query(sql, params)
+        .then(result => {
+          const [user] = result.rows;
+          res.status(201).json(user);
+        })
+        .catch(err => next(err));
     })
     .catch(err => next(err));
 });
