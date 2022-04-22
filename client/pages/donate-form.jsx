@@ -69,7 +69,7 @@ export default class DonateForm extends React.Component {
   }
 
   render() {
-    const placeholder = this.state.fileUrl ? this.state.fileUrl : 'images/pink-donut.jpg';
+    const placeholder = this.state.fileUrl ? this.state.fileUrl : 'images/pink-donut.jpeg';
     return (
       <div className="container">
         <div className="color-overlay d-flex justify-content-center align-items-center">
