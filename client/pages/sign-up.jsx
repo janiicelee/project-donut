@@ -84,7 +84,8 @@ export default class SignUpForm extends React.Component {
 
     fetch('/api/auth/sign-up', {
       method: 'POST',
-      body: formData
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(this.state)
     })
       .then(response => response.json())
       .then(resBody => {
@@ -111,7 +112,7 @@ export default class SignUpForm extends React.Component {
             <h4 className="text-center font-weight-bold">
               <span><img src="images/donut.png" className="donut-icon"></img></span>
               <span><img src="images/donut.png" className="donut-icon"></img></span>
-              Welcome to DONUT!
+              Join DONUT
               <span><img src="images/donut.png" className="donut-icon"></img></span>
               <span><img src="images/donut.png" className="donut-icon"></img></span>
             </h4>
@@ -138,7 +139,7 @@ export default class SignUpForm extends React.Component {
             <Form.Group className="mb-3" controlId="FormPassword">
 
               <Form.Control
-                type="text"
+                type="password"
                 name="password"
                 placeholder="Password"
                 value={this.state.password}
@@ -148,7 +149,7 @@ export default class SignUpForm extends React.Component {
             <Form.Group className="mb-3" controlId="FormPasswordVerify">
 
               <Form.Control
-                type="text"
+                type="password"
                 name="passwordVerify"
                 placeholder="Confirm Password"
                 value= {this.state.passwordVerfiy}
@@ -165,7 +166,7 @@ export default class SignUpForm extends React.Component {
 
             </Form.Group>
 
-            <Button variant="primary" size="sm" type="submit" className="donate-button">Join!</Button>
+            <Button variant="primary" size="sm" type="submit" className="donate-button">Submit</Button>
           </Form>
         </div>
       </div>
