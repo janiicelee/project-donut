@@ -22,24 +22,21 @@ export default class SignUpForm extends React.Component {
   }
 
   componentDidMount() {
-
     window.navigator.geolocation.getCurrentPosition(position => {
-
       fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},${position.coords.longitude}&key=${process.env.GOOGLE_MAPS_API_KEY}`)
         .then(res => res.json())
         .then(currentLocation => {
           for (let i = 0; i < currentLocation.results.length; i++) {
             const result = currentLocation.results[i];
             if (result.types.includes('postal_code')) {
-
               this.setState({
                 latitude: position.coords.latitude,
                 longitude: position.coords.longitude,
                 location: result.formatted_address
               });
+              break;
             }
           }
-
         });
     });
   }
@@ -75,13 +72,7 @@ export default class SignUpForm extends React.Component {
   }
 
   handleSubmit(event) {
-    alert('Congratulations for joining DONUT!');
     event.preventDefault();
-    const formData = new FormData();
-    formData.append('username', this.state.username);
-    formData.append('email', this.state.email);
-    formData.append('password', this.state.password);
-
     fetch('/api/auth/sign-up', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -96,6 +87,7 @@ export default class SignUpForm extends React.Component {
           passwordVerfiy: '',
           location: ''
         });
+        alert('Congratulations for being a DONUT member!');
       })
       .catch(error => {
         console.error('Error: ', error);
@@ -125,9 +117,7 @@ export default class SignUpForm extends React.Component {
                 value={this.state.username}
                 onChange={this.handleUsername} />
             </Form.Group>
-
             <Form.Group className="mb-3" controlId="FormEmail">
-              {/* <Form.Label>What does it look like?</Form.Label> */}
               <Form.Control
                 type="text"
                 name="email"
@@ -135,9 +125,7 @@ export default class SignUpForm extends React.Component {
                 value={this.state.email}
                 onChange={this.handleEmail} />
             </Form.Group>
-
             <Form.Group className="mb-3" controlId="FormPassword">
-
               <Form.Control
                 type="password"
                 name="password"
@@ -145,9 +133,7 @@ export default class SignUpForm extends React.Component {
                 value={this.state.password}
                 onChange={this.handlePassword} />
             </Form.Group>
-
             <Form.Group className="mb-3" controlId="FormPasswordVerify">
-
               <Form.Control
                 type="password"
                 name="passwordVerify"
@@ -155,7 +141,6 @@ export default class SignUpForm extends React.Component {
                 value= {this.state.passwordVerfiy}
                 onChange={this.handlePasswordVerify} />
             </Form.Group>
-
             <Form.Group className="mb-3" controlId="FormLocation">
               <Form.Control
                 type="text"
@@ -163,9 +148,7 @@ export default class SignUpForm extends React.Component {
                 placeholder="Locating where you at..."
                 value={this.state.location}
                 onChange={this.handleLocation} />
-
             </Form.Group>
-
             <Button variant="primary" size="sm" type="submit" className="donate-button">Submit</Button>
           </Form>
         </div>
