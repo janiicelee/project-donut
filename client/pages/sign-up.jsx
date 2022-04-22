@@ -25,7 +25,7 @@ export default class SignUpForm extends React.Component {
 
     window.navigator.geolocation.getCurrentPosition(position => {
 
-      fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},${position.coords.longitude}&key=AIzaSyA56RtlrYCbPJ8kmpaeOEY9zDX9qv1IawU`)
+      fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},${position.coords.longitude}&key=${process.env.GOOGLE_MAPS_API_KEY}`)
         .then(res => res.json())
         .then(currentLocation => {
           for (let i = 0; i < currentLocation.results.length; i++) {
