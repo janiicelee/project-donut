@@ -5,6 +5,7 @@ import parseRoute from './lib/parse-route';
 import DonateForm from './pages/donate-form';
 import ItemDetails from './pages/item-details';
 import SignUpForm from './pages/sign-up';
+import LoginForm from './pages/log-in';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -37,6 +38,10 @@ export default class App extends React.Component {
 
     if (route.path === 'user') {
       return <SignUpForm />;
+    }
+
+    if (route.path === 'login') {
+      return <LoginForm />;
     }
   }
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Form, Button } from 'react-bootstrap';
+import Redirect from './redirect';
 
 export default class DonateForm extends React.Component {
   constructor(props) {
@@ -70,6 +71,9 @@ export default class DonateForm extends React.Component {
 
   render() {
     const placeholder = this.state.fileUrl ? this.state.fileUrl : 'images/pink-donut.jpeg';
+
+    if (!this.state.userId) return <Redirect to="user" />;
+
     return (
       <div className="container">
         <div className="color-overlay d-flex justify-content-center align-items-center">

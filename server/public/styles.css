@@ -62,3 +62,8 @@ hr {
   height: 20rem;
   align-items: center;
 }
+
+.login-button {
+  background-color: black;
+  color: #fbedf4;
+}
