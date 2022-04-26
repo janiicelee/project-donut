@@ -8,21 +8,13 @@ export default class LoginForm extends React.Component {
       email: '',
       password: ''
     };
-    this.handleEmail = this.handleEmail.bind(this);
-    this.handlePassword = this.handlePassword.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
-  handleEmail(event) {
-    this.setState({
-      email: event.target.value
-    });
-  }
-
-  handlePassword(event) {
-    this.setState({
-      password: event.target.value
-    });
+  handleChange(event) {
+    const { name, value } = event.target;
+    this.setState({ [name]: value });
   }
 
   handleSubmit(event) {
@@ -38,6 +30,7 @@ export default class LoginForm extends React.Component {
           email: '',
           password: ''
         });
+        window.localStorage.setItem('donut-jwt', resBody.token);
         alert('Start donating!');
         window.location.hash = '#';
       })
@@ -47,10 +40,11 @@ export default class LoginForm extends React.Component {
   }
 
   render() {
+    const { handleChange, handleSubmit } = this;
     return (
       <div className="container">
         <div className="color-overlay d-flex justify-content-center align-items-center">
-          <Form className="rounded p-4 p-sm-3" onSubmit={this.handleSubmit}>
+          <Form className="rounded p-4 p-sm-3" onSubmit={handleSubmit}>
             <hr />
             <h4 className="text-center font-weight-bold">
               <span><img src="images/donut.png" className="donut-icon"></img></span>
@@ -66,7 +60,7 @@ export default class LoginForm extends React.Component {
                 name="email"
                 placeholder="Email"
                 value={this.state.email}
-                onChange={this.handleEmail} />
+                onChange={handleChange} />
             </Form.Group>
             <Form.Group className="mb-3" controlId="FormPassword">
               <Form.Control
@@ -74,7 +68,7 @@ export default class LoginForm extends React.Component {
                 name="password"
                 placeholder="Password"
                 value={this.state.password}
-                onChange={this.handlePassword} />
+                onChange={handleChange} />
             </Form.Group>
             <Button variant="primary" size="sm" type="submit" className="donate-button btn-block">Log In</Button>
           </Form>

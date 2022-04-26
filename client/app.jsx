@@ -6,11 +6,14 @@ import DonateForm from './pages/donate-form';
 import ItemDetails from './pages/item-details';
 import SignUpForm from './pages/sign-up';
 import LoginForm from './pages/log-in';
+import decodeToken from './lib/decode-token';
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      user: null,
+      isAuthorizing: true,
       route: parseRoute(window.location.hash)
     };
   }
@@ -19,6 +22,10 @@ export default class App extends React.Component {
     window.addEventListener('hashchange', () => {
       this.setState({ route: parseRoute(window.location.hash) });
     }, false);
+
+    const token = window.localStorage.getItem('jwt');
+    const user = token ? decodeToken(token) : null;
+    this.setState({ user, isAuthorizing: false });
   }
 
   renderPage() {
