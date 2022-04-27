@@ -84,10 +84,10 @@ export default class SignUpForm extends React.Component {
           username: '',
           email: '',
           password: '',
-          passwordVerfiy: '',
-          location: ''
+          passwordVerfiy: ''
         });
         alert('Congratulations for being a DONUT member!');
+        window.location.hash = '#';
       })
       .catch(error => {
         console.error('Error: ', error);
@@ -149,7 +149,8 @@ export default class SignUpForm extends React.Component {
                 value={this.state.location}
                 onChange={this.handleLocation} />
             </Form.Group>
-            <Button variant="primary" size="sm" type="submit" className="donate-button">Submit</Button>
+            <Button href="#login" variant="primary" size="sm" type="button" className="login-button btn-block">Already a member?</Button>
+            <Button variant="primary" size="sm" type="submit" className="donate-button btn-block">Sign Up</Button>
           </Form>
         </div>
       </div>

@@ -8,7 +8,7 @@ export default class DonateForm extends React.Component {
       title: '',
       content: '',
       fileUrl: '',
-      userId: 1
+      userId: null
     };
     this.fileInputRef = React.createRef();
     this.handleChange = this.handleChange.bind(this);
@@ -33,17 +33,19 @@ export default class DonateForm extends React.Component {
 
     fetch('/api/uploads', {
       method: 'POST',
+      headers: { 'x-access-token': window.localStorage.getItem('donut-jwt') },
       body: formData
     })
       .then(response => response.json())
       .then(resBody => {
         this.setState({
-          title: '',
-          content: '',
-          fileUrl: '',
-          userId: 1
+          title: resBody.title,
+          content: resBody.content,
+          fileUrl: resBody.fileUrl,
+          userId: resBody.userId
         });
         this.fileInputRef.current.value = null;
+        window.location.hash = '#';
       })
       .catch(error => {
         console.error('Error:', error);
@@ -70,6 +72,7 @@ export default class DonateForm extends React.Component {
 
   render() {
     const placeholder = this.state.fileUrl ? this.state.fileUrl : 'images/pink-donut.jpeg';
+
     return (
       <div className="container">
         <div className="color-overlay d-flex justify-content-center align-items-center">
@@ -92,7 +95,7 @@ export default class DonateForm extends React.Component {
                 type="file"
                 name="image"
                 ref={this.fileInputRef}
-                accept=".png, .jpg, .jpeg, .gif"
+                accept=".png, .jpg, .jpeg, .gif, .webp"
                 onChange={this.handleFile} />
             </Form.Group>
 
@@ -112,5 +115,4 @@ export default class DonateForm extends React.Component {
       </div>
     );
   }
-
 }

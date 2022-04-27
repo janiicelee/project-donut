@@ -1,11 +1,13 @@
 require('dotenv/config');
 const pg = require('pg');
 const express = require('express');
+const jwt = require('jsonwebtoken');
 const argon2 = require('argon2');
 const errorMiddleware = require('./error-middleware');
 const staticMiddleware = require('./static-middleware');
 const uploadsMiddleware = require('./uploads-middleware');
 const ClientError = require('./client-error');
+const authorizationMiddleware = require('./authorization-middleware');
 
 const db = new pg.Pool({
   connectionString: 'postgres://dev:dev@localhost/dev',
@@ -53,26 +55,6 @@ app.get('/api/items', (req, res, next) => {
       });
     });
 
-});
-
-// POST item
-app.post('/api/uploads', uploadsMiddleware, (req, res, next) => {
-
-  const { title, content, userId } = req.body;
-  const fileUrl = `/images/${req.file.filename}`;
-  const sql = `
-    insert into "items" ("title", "fileUrl", "userId", "content", "uploadedAt")
-    values ($1, $2, $3, $4, now())
-    returning *
-  `;
-
-  const params = [title, fileUrl, userId, content];
-  db.query(sql, params)
-    .then(result => {
-      const [file] = result.rows;
-      res.status(201).json(file);
-    })
-    .catch(err => next(err));
 });
 
 // GET item details
@@ -126,6 +108,64 @@ app.post('/api/auth/sign-up', (req, res, next) => {
           res.status(201).json(user);
         })
         .catch(err => next(err));
+    })
+    .catch(err => next(err));
+});
+
+// user log-in
+app.post('/api/auth/log-in', (req, res, next) => {
+  const { email, password } = req.body;
+  if (!email || !password) {
+    throw new ClientError(401, 'invalid login');
+  }
+  const sql = `
+    select "userId",
+           "hashedPassword"
+      from "users"
+     where "email" = $1
+  `;
+
+  const params = [email];
+  db.query(sql, params)
+    .then(result => {
+      const [user] = result.rows;
+      if (!user) {
+        throw new ClientError(401, 'invalid login');
+      }
+      const { userId, hashedPassword } = user;
+      return argon2
+        .verify(hashedPassword, password)
+        .then(isMatching => {
+          if (!isMatching) {
+            throw new ClientError(401, 'invalid login');
+          }
+          const payload = { userId, email };
+          const token = jwt.sign(payload, process.env.TOKEN_SECRET);
+          res.json({ token, user: payload });
+        });
+    })
+    .catch(err => next(err));
+});
+
+app.use(authorizationMiddleware);
+
+// POST item
+app.post('/api/uploads', uploadsMiddleware, (req, res, next) => {
+
+  const { title, content } = req.body;
+  const { userId } = req.user;
+  const fileUrl = `/images/${req.file.filename}`;
+  const sql = `
+    insert into "items" ("title", "fileUrl", "userId", "content", "uploadedAt")
+    values ($1, $2, $3, $4, now())
+    returning *
+  `;
+
+  const params = [title, fileUrl, userId, content];
+  db.query(sql, params)
+    .then(result => {
+      const [file] = result.rows;
+      res.status(201).json(file);
     })
     .catch(err => next(err));
 });
