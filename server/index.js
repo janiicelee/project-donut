@@ -10,7 +10,7 @@ const ClientError = require('./client-error');
 const authorizationMiddleware = require('./authorization-middleware');
 
 const db = new pg.Pool({
-  connectionString: 'postgres://dev:dev@localhost/dev',
+  connectionString: process.env.DATABASE_URL,
   ssl: {
     rejectUnauthorized: false
   }
