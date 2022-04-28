@@ -46,7 +46,7 @@ export default class Catalog extends React.Component {
     return (
       <div className="container">
         <hr />
-        <h2 className="text-center">DONate Used Things!</h2>
+        <h3 className="text-center">DONate Used Things!</h3>
         <hr />
         <div className="text-center">
           <SearchBar onChange={this.handleSearchChange} />
