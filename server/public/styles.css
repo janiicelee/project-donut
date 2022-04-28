@@ -68,6 +68,7 @@ hr {
   width: 20rem;
   height: 20rem;
   align-items: center;
+  object-fit: contain;
 }
 
 .login-button {
