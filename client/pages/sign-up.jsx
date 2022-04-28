@@ -101,13 +101,13 @@ export default class SignUpForm extends React.Component {
         <div className="color-overlay d-flex justify-content-center align-items-center">
           <Form className="rounded p-4 p-sm-3" onSubmit={this.handleSubmit}>
             <hr />
-            <h4 className="text-center font-weight-bold">
-              <span><img src="images/donut.png" className="donut-icon"></img></span>
-              <span><img src="images/donut.png" className="donut-icon"></img></span>
-              Join DONUT
-              <span><img src="images/donut.png" className="donut-icon"></img></span>
-              <span><img src="images/donut.png" className="donut-icon"></img></span>
-            </h4>
+            <h5 className="text-center font-weight-bold">
+              <span><img src="images/donut.png" className="donut-icon-form"></img></span>
+              <span><img src="images/donut.png" className="donut-icon-form"></img></span>
+              Sign Up
+              <span><img src="images/donut.png" className="donut-icon-form"></img></span>
+              <span><img src="images/donut.png" className="donut-icon-form"></img></span>
+            </h5>
             <hr />
             <Form.Group className="mb-3" controlId="FormUsername">
               <Form.Control

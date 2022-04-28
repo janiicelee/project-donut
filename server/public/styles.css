@@ -10,6 +10,13 @@ body {
   margin-right: 10px;
 }
 
+.donut-icon-form {
+  width: 30px;
+  height: 30px;
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
 h2,
 .card-title {
   font-weight: bold;
@@ -58,9 +65,10 @@ hr {
 }
 
 .item-img {
-  width: 30rem;
+  width: 20rem;
   height: 20rem;
   align-items: center;
+  object-fit: contain;
 }
 
 .login-button {
