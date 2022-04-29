@@ -65,13 +65,16 @@ hr {
 }
 
 .item-img {
-  width: 20rem;
+  width: 30rem;
   height: 20rem;
-  align-items: center;
   object-fit: contain;
 }
 
 .login-button {
   background-color: black;
   color: #fbedf4;
+}
+
+.form {
+  width: fit-content;
 }
