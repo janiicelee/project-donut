@@ -72,13 +72,12 @@ export default class DonateForm extends React.Component {
 
   render() {
     const placeholder = this.state.fileUrl ? this.state.fileUrl : 'images/pink-donut.jpeg';
-
     return (
       <div className="container">
-        <div className="color-overlay d-flex justify-content-center align-items-center">
-          <Form className="rounded p-4 p-sm-3" onSubmit={this.handleSubmit}>
+        <div className="color-overlay d-flex justify-content-center align-items-center mh-100 ">
+          <Form className="rounded p-4 p-sm-3 form" onSubmit={this.handleSubmit}>
             <h4 className="text-center font-weight-bold">Start donating your item!</h4>
-            <img src={placeholder} alt="placeholder" className="item-img"></img>
+            <img src={placeholder} alt="placeholder" className="item-img img-fluid"></img>
             <Form.Group className="mb-3" controlId="FormTitle">
               <Form.Label>What is your item?</Form.Label>
               <Form.Control
@@ -88,7 +87,6 @@ export default class DonateForm extends React.Component {
                 value={this.state.title}
                 onChange={this.handleTitle} />
             </Form.Group>
-
             <Form.Group className="mb-3" controlId="FormImage">
               <Form.Label>What does it look like?</Form.Label>
               <Form.Control
@@ -98,7 +96,6 @@ export default class DonateForm extends React.Component {
                 accept=".png, .jpg, .jpeg, .gif, .webp"
                 onChange={this.handleFile} />
             </Form.Group>
-
             <Form.Group>
               <Form.Label>Tell me about your item!</Form.Label>
               <Form.Control

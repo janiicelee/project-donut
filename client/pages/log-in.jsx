@@ -44,7 +44,7 @@ export default class LoginForm extends React.Component {
     return (
       <div className="container">
         <div className="color-overlay d-flex justify-content-center align-items-center">
-          <Form className="rounded p-4 p-sm-3" onSubmit={handleSubmit}>
+          <Form className="rounded p-4 p-sm-3 form" onSubmit={handleSubmit}>
             <hr />
             <h5 className="text-center font-weight-bold">
               <span><img src="images/donut.png" className="donut-icon-form"></img></span>
