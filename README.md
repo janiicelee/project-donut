@@ -35,7 +35,9 @@ A full stack web application for people who want to donate their used items or r
 - User can go to their personal info page
 
 ## Preview
+![Kapture 2022-05-01 at 16 19 41](https://user-images.githubusercontent.com/57986882/166170580-d112c974-008b-433d-b9c8-088c9c969b86.gif)
 
+![Kapture 2022-05-01 at 16 46 20](https://user-images.githubusercontent.com/57986882/166170583-b77deedd-2bda-4390-a97f-992b1ea2c886.gif)
 
 ## Development
 
