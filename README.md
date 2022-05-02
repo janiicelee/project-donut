@@ -36,7 +36,7 @@ A full stack web application for people who want to donate their used items or r
 
 ## Preview
 ![Kapture 2022-05-01 at 16 19 41](https://user-images.githubusercontent.com/57986882/166170580-d112c974-008b-433d-b9c8-088c9c969b86.gif)
-
+![Kapture 2022-05-01 at 17 25 04](https://user-images.githubusercontent.com/57986882/166171418-7b80a1f7-d0b1-4ff7-870d-9b5ed738fe21.gif)
 ![Kapture 2022-05-01 at 16 46 20](https://user-images.githubusercontent.com/57986882/166170583-b77deedd-2bda-4390-a97f-992b1ea2c886.gif)
 
 ## Development
