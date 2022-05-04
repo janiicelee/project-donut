@@ -11,15 +11,10 @@ export default class DonateForm extends React.Component {
       userId: null
     };
     this.fileInputRef = React.createRef();
-    this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleTitle = this.handleTitle.bind(this);
     this.handleFile = this.handleFile.bind(this);
     this.handleContent = this.handleContent.bind(this);
-  }
-
-  handleChange(event) {
-    this.setState({ value: event.target.value });
   }
 
   handleSubmit(event) {
