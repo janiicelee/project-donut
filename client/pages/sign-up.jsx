@@ -97,7 +97,6 @@ export default class SignUpForm extends React.Component {
   render() {
     return (
       <div className="container">
-
         <div className="color-overlay d-flex justify-content-center align-items-center">
           <Form className="rounded p-4 p-sm-3 form" onSubmit={this.handleSubmit}>
             <hr />

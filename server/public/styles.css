@@ -3,6 +3,16 @@ body {
   background-color: #fbedf4;
 }
 
+h2,
+.card-title {
+  font-weight: bold;
+}
+
+hr {
+  border: none;
+  padding: 0.5px;
+}
+
 .donut-icon {
   width: 35px;
   height: 35px;
@@ -17,21 +27,11 @@ body {
   margin-right: 8px;
 }
 
-h2,
-.card-title {
-  font-weight: bold;
-}
-
 .card {
   height: 95%;
   overflow: hidden;
   padding: 2px;
   margin: 2px;
-}
-
-hr {
-  border: none;
-  padding: 0.5px;
 }
 
 .user-icon {

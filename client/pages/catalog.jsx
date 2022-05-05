@@ -22,7 +22,6 @@ export default class Catalog extends React.Component {
     this.handleSearchChange = this.handleSearchChange.bind(this);
     this.state = {
       searchText: '',
-      filtered: [],
       items: []
     };
   }
