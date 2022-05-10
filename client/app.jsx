@@ -23,19 +23,25 @@ export default class App extends React.Component {
       this.setState({ route: parseRoute(window.location.hash) });
     }, false);
 
-    const token = window.localStorage.getItem('jwt');
+    const token = window.localStorage.getItem('donut-jwt');
     const user = token ? decodeToken(token) : null;
     this.setState({ user, isAuthorizing: false });
   }
 
   renderPage() {
     const { route } = this.state;
+    const token = window.localStorage.getItem('donut-jwt');
+
     if (route.path === '') {
       return <Catalog items={this.state.items}/>;
     }
 
-    if (route.path === 'donate') {
+    if (route.path === 'donate' && token) {
       return <DonateForm />;
+    }
+
+    if (route.path === 'donate' && !token) {
+      return <SignUpForm />;
     }
 
     if (route.path === 'items') {
@@ -47,7 +53,7 @@ export default class App extends React.Component {
       return <SignUpForm />;
     }
 
-    if (route.path === 'login') {
+    if (route.path === 'login' && !token) {
       return <LoginForm />;
     }
   }
