@@ -147,6 +147,14 @@ app.post('/api/auth/log-in', (req, res, next) => {
     .catch(err => next(err));
 });
 
+// user logout
+// app.get('/api/auth/log-out', (req, res, next) => {
+//   // const {email, password} = req.body;
+//   req.logout();
+//   res.redirect('');
+
+// });
+
 app.use(authorizationMiddleware);
 
 // POST item

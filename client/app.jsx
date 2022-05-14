@@ -7,6 +7,7 @@ import ItemDetails from './pages/item-details';
 import SignUpForm from './pages/sign-up';
 import LoginForm from './pages/log-in';
 import decodeToken from './lib/decode-token';
+import Logout from './pages/log-out';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -16,6 +17,7 @@ export default class App extends React.Component {
       isAuthorizing: true,
       route: parseRoute(window.location.hash)
     };
+    // this.handleLogOut = this.handleLogOut.bind(this);
   }
 
   componentDidMount() {
@@ -27,6 +29,12 @@ export default class App extends React.Component {
     const user = token ? decodeToken(token) : null;
     this.setState({ user, isAuthorizing: false });
   }
+
+  // handleLogOut() {
+  //   window.localStorage.removeItem('donut-jwt');
+  //   this.setState({ user: null });
+  //   window.location.hash = '#sign-up';
+  // }
 
   renderPage() {
     const { route } = this.state;
@@ -49,12 +57,16 @@ export default class App extends React.Component {
       return <ItemDetails itemId={itemId}/>;
     }
 
-    if (route.path === 'user') {
+    if (route.path === 'user' && !token) {
       return <SignUpForm />;
     }
 
     if (route.path === 'login' && !token) {
       return <LoginForm />;
+    }
+
+    if (route.path === 'user' && token) {
+      return <Logout />;
     }
   }
 
