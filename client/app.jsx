@@ -17,7 +17,6 @@ export default class App extends React.Component {
       isAuthorizing: true,
       route: parseRoute(window.location.hash)
     };
-    // this.handleLogOut = this.handleLogOut.bind(this);
   }
 
   componentDidMount() {
@@ -29,12 +28,6 @@ export default class App extends React.Component {
     const user = token ? decodeToken(token) : null;
     this.setState({ user, isAuthorizing: false });
   }
-
-  // handleLogOut() {
-  //   window.localStorage.removeItem('donut-jwt');
-  //   this.setState({ user: null });
-  //   window.location.hash = '#sign-up';
-  // }
 
   renderPage() {
     const { route } = this.state;

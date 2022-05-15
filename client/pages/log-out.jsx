@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Container, Row } from 'react-bootstrap';
 
 export default class Logout extends React.Component {
   constructor(props) {
@@ -11,18 +11,29 @@ export default class Logout extends React.Component {
   handleLogout() {
     window.localStorage.removeItem('donut-jwt');
     this.setState({ user: null });
-    window.location.hash('#sign-up');
+    window.location.assign('#');
   }
 
   render() {
     const { handleLogout } = this;
     return (
-      <div className="container">
-        <div className="color-overlay d-flex justify-content align-items-center">
-          <Button onChange={handleLogout}>Log Out</Button>
-        </div>
+      <div>
+        <Container>
+          <hr />
+          <Row className="justify-content-center">
+          <h4>Thank you for using DONUT!</h4>
+          </Row>
+          <hr />
+          <Row className="justify-content-center">
+          <Button className=""
+                  variant="dark"
+                  size="lg"
+                  onClick={handleLogout}>
+                    Log Out
+          </Button>
+          </Row>
+        </Container>
       </div>
     );
-
   }
 }
