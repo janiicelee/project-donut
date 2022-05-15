@@ -7,6 +7,7 @@ import ItemDetails from './pages/item-details';
 import SignUpForm from './pages/sign-up';
 import LoginForm from './pages/log-in';
 import decodeToken from './lib/decode-token';
+import Logout from './pages/log-out';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -49,12 +50,16 @@ export default class App extends React.Component {
       return <ItemDetails itemId={itemId}/>;
     }
 
-    if (route.path === 'user') {
+    if (route.path === 'user' && !token) {
       return <SignUpForm />;
     }
 
     if (route.path === 'login' && !token) {
       return <LoginForm />;
+    }
+
+    if (route.path === 'user' && token) {
+      return <Logout />;
     }
   }
 
