@@ -61,7 +61,7 @@ A full stack web application for people who want to donate their used items or r
     ```shell
     npm install
     ```
-    
+
 3. Fill in the empty values of the .env.example file and copy it.
 
     ```shell
@@ -80,7 +80,7 @@ A full stack web application for people who want to donate their used items or r
 6. Import your database into Postgres.
     ```shell
     npm run db:import
-    ```   
+    ```
 7.  Start the project. Once started, you can view the application by opening http://localhost:3000 in your browser.
 
     ```shell
@@ -91,4 +91,3 @@ A full stack web application for people who want to donate their used items or r
     ```shell
     pgweb --db=yourDatabaseName
     ```
-
